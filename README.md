@@ -1,6 +1,6 @@
 # Tetris3D-Source
 This is the source code for my Tetris clone being made in Unity version 2019.2.3f1.
-Yes, I plan on implementing all of the cool Tetris stuff like spinning, twisting, and wallkicks.
+Yes, I plan on implementing all of the cool SRS stuff like spinning, twisting, and wallkicks.
 </br>Wikis and resources I'll be using:
 https://harddrop.com/wiki/SRS
 
