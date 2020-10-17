@@ -269,10 +269,12 @@ public class PieceMovement : MonoBehaviour
     }
     public void setTranslationVectorC(Vector2 setValue)
     {
+        canRotateClockwise = true;
         translationVectorC = setValue;
     }
     public void setTranslationVectorCC(Vector2 setValue)
     {
+        canRotateCounterClockwise = true;
         translationVectorCC = setValue;
     }
 
