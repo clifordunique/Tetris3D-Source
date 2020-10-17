@@ -21,14 +21,15 @@ public class PieceMovement : MonoBehaviour
     [SerializeField] private float gravityTime = 1f;
     [SerializeField] private float movementTime = 0.1f;
     [SerializeField] private float softDropTime = 0.1f;
-    [SerializeField] private GameObject movementChecks;
+    //[SerializeField] private GameObject movementChecks;
 
     // Gets and Sets
     private bool canMoveLeft = true;
     private bool canMoveRight = true;
     private bool canRotateClockwise = true;
     private bool canRotateCounterClockwise = true;
-    private Vector2 translationVector;
+    private Vector2 translationVectorC = new Vector2(0,0);
+    private Vector2 translationVectorCC = new Vector2(0, 0);
     // WallKicks and Twists are advanced Tetris moves. I coded them in because I'm a badass.
 
     #endregion
@@ -46,6 +47,7 @@ public class PieceMovement : MonoBehaviour
     //private bool inputHold = false;
 
     // Fields for moving left/right
+    private bool isGrounded = false;
     private bool movingLeft = false;
     private bool movingRight = false;
     private bool movedLeft = false;
@@ -134,13 +136,9 @@ public class PieceMovement : MonoBehaviour
 
         if (inputRC)
         {
-            if (canRotateClockwise && isJumping)
+            if (canRotateClockwise)
             {
-                rotateClockwise(true);
-            }
-            else if (canRotateClockwise)
-            {
-                rotateClockwise(false);
+                rotateClockwise(translationVectorC);
             }
         }
 
@@ -148,11 +146,7 @@ public class PieceMovement : MonoBehaviour
         {
             if (canRotateCounterClockwise)
             {
-                rotateCounterClockwise(translationVector);
-            }
-            else if (canRotateCounterClockwise)
-            {
-                rotateCounterClockwise(translationVector);
+                rotateCounterClockwise(translationVectorCC);
             }
         }
         inputLeft = false;
@@ -253,6 +247,10 @@ public class PieceMovement : MonoBehaviour
 
     #region Public Methods
 
+    public void setIsGrounded(bool setValue)
+    {
+        isGrounded = setValue;
+    }
     public void setCanMoveLeft(bool setValue)
     {
         canMoveLeft = setValue;
@@ -269,9 +267,14 @@ public class PieceMovement : MonoBehaviour
     {
         canRotateCounterClockwise = setValue;
     }
-    public void setTranslationVector(Vector2 setValue)
+    public void setTranslationVectorC(Vector2 setValue)
     {
-        translationVector = setValue;
+        translationVectorC = setValue;
     }
+    public void setTranslationVectorCC(Vector2 setValue)
+    {
+        translationVectorCC = setValue;
+    }
+
     #endregion
 }

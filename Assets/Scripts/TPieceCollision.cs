@@ -53,6 +53,7 @@ public class TPieceCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        pieceMovementScript.setIsGrounded(false);
         Vector3 down = transform.TransformDirection(Vector3.down);
         Vector3 up = transform.TransformDirection(Vector3.up);
         Vector3 left = transform.TransformDirection(Vector3.left);
@@ -91,10 +92,12 @@ public class TPieceCollision : MonoBehaviour
                     break;
             }
 
-            // One key thing to take from the raycast methodology is that all collisions won't take into account
-            // the cubes of the current piece. IE A T-Piece Top won't care about a T-Piece Bottom being below it.
+            // Note!
+            // All collisions won't take into account the cubes of the current piece. IE A T-Piece Top won't care about a T-Piece Bottom being below it.
+            // Ground checking is taken care of in the Basic RS Raycast Methodology
+            // The SRS Raycast Methodology only takes into account special cases for their respective orientations
 
-            #region Non-SRS Raycast Methodology
+            #region Basic RS Raycast Methodology
 
             if (Physics.Raycast(currentCube.transform.position, up, 1, layerMask))
             {
@@ -110,6 +113,8 @@ public class TPieceCollision : MonoBehaviour
             {
                 temporary[1] = true;
                 Debug.DrawRay(currentCube.transform.position, transform.TransformDirection(down) * 1, Color.blue);
+                // Here's where ground checking is easily done!
+                pieceMovementScript.setIsGrounded(true);
             }
             else
             {
@@ -156,25 +161,121 @@ public class TPieceCollision : MonoBehaviour
             }
 
             #endregion
+
         }
 
         #region SRS Raycast Methodology
 
+        //// Orientation 1
+        bool leftUp2 = false;
+        Debug.DrawRay(new Vector3(tPieceLeft.transform.position.x, tPieceLeft.transform.position.y + 1, tPieceLeft.transform.position.z), up * 1, Color.green);
+        if (Physics.Raycast(new Vector3 (tPieceLeft.transform.position.x, tPieceLeft.transform.position.y + 1, tPieceLeft.transform.position.z), up, 1, layerMask))
+        {
+            leftUp2 = true;
+        }
+        bool leftDown3 = false;
+        Debug.DrawRay(new Vector3(tPieceLeft.transform.position.x, tPieceLeft.transform.position.y - 1, tPieceLeft.transform.position.z), down * 2, Color.green);
+        if (Physics.Raycast(new Vector3(tPieceLeft.transform.position.x, tPieceLeft.transform.position.y - 1, tPieceLeft.transform.position.z), down, 3, layerMask))
+        {
+            leftDown3 =  true;
+        }
+        bool leftDown2Right1 = false;
+        Debug.DrawRay(new Vector3(tPieceLeft.transform.position.x, tPieceLeft.transform.position.y - 2, tPieceLeft.transform.position.z), right * 1, Color.green);
+        if (Physics.Raycast(new Vector3(tPieceLeft.transform.position.x, tPieceLeft.transform.position.y - 2, tPieceLeft.transform.position.z), right, 1, layerMask))
+        {
+            leftDown2Right1 = true;
+        }
+        // Reverse
+        bool rightUp2 = false;
+        Debug.DrawRay(new Vector3(tPieceRight.transform.position.x, tPieceRight.transform.position.y + 1, tPieceRight.transform.position.z), up * 1, Color.green);
+        if (Physics.Raycast(new Vector3(tPieceRight.transform.position.x, tPieceRight.transform.position.y + 1, tPieceRight.transform.position.z), up, 1, layerMask))
+        {
+            rightUp2 = true;
+        }
+        bool rightDown3 = false;
+        Debug.DrawRay(new Vector3(tPieceRight.transform.position.x, tPieceRight.transform.position.y - 1, tPieceRight.transform.position.z), down * 2, Color.green);
+        if (Physics.Raycast(new Vector3(tPieceRight.transform.position.x, tPieceRight.transform.position.y - 1, tPieceRight.transform.position.z), down, 2, layerMask))
+        {
+            rightDown3 = true;
+        }
+        bool rightDown2Left1 = false;
+        Debug.DrawRay(new Vector3(tPieceRight.transform.position.x, tPieceRight.transform.position.y - 2, tPieceRight.transform.position.z), left * 1, Color.green);
+        if (Physics.Raycast(new Vector3(tPieceRight.transform.position.x, tPieceRight.transform.position.y - 2, tPieceRight.transform.position.z), left, 1, layerMask))
+        {
+            rightDown2Left1 = true;
+        }
 
+        //// Orientation 2
+        bool rightRight2 = false;
+        Debug.DrawRay(new Vector3(tPieceRight.transform.position.x + 1, tPieceRight.transform.position.y, tPieceRight.transform.position.z), right * 2, Color.magenta);
+        if (Physics.Raycast(new Vector3(tPieceRight.transform.position.x + 1, tPieceRight.transform.position.y, tPieceRight.transform.position.z), right, 2, layerMask))
+        {
+            rightRight2 = true;
+        }
+        bool topDown2 = false;
+        Debug.DrawRay(new Vector3(tPieceTop.transform.position.x, tPieceTop.transform.position.y - 1, tPieceTop.transform.position.z), down * 2, Color.magenta);
+        if (Physics.Raycast(new Vector3(tPieceTop.transform.position.x, tPieceTop.transform.position.y - 1, tPieceTop.transform.position.z), down, 2, layerMask))
+        {
+            topDown2 = true;
+        }
+        //// Orientation 3
+
+        //// Orientation 4
 
         #endregion
 
+        // This switch statement contains ALL of the checks necessary and sets values accordingly.
         switch (orientation)
         {
             case 1:
                 resetMovementBools();
-                if (tPieceBottomBools[1])
+                //// Clockwise Rotation Checks
+                // Kick test 0R 1
+                if (!tPieceBottomBools[1])
                 {
-                    pieceMovementScript.setIsJumping(true);
+                    pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
                 }
+                // Kick test 0R 2
+                if (tPieceBottomBools[1] && !tPieceTopBools[2] && !tPieceLeftBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(-1, 0));
+                }
+                // Kick test 0R 3
+                if (!leftUp2 && tPieceLeftBools[1] && tPieceBottomBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(-1, 1));
+                }
+                // Kick test 0R 4 (The triple twist)
+                if (!leftDown3 && !leftDown2Right1 && tPieceBottomBools[1] && tPieceLeftBools[0])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(-1, -2));
+                }
+                //// CounterClockwise Rotation Checks
+                // Skipping Kick test 0R 1 because it's universal
+                // Kick test 0R 2
+                if (tPieceBottomBools[1] && !tPieceTopBools[3] && !tPieceRightBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(1, 0));
+                }
+                // Kick test 0R 3
+                if (!rightUp2 && tPieceRightBools[1] && tPieceBottomBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(1, 1));
+                }
+                // Kick test 0R 4 (The triple twist)
+                if (!rightDown3 && !rightDown2Left1 && tPieceBottomBools[1] && tPieceRightBools[0])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(1, -2));
+                }
+                //// Movement test
                 if (tPieceLeftBools[2] || tPieceTopBools[2])
                 {
                     pieceMovementScript.setCanMoveLeft(false);
+                }
+                if (tPieceRightBools[3] || tPieceTopBools[3])
+                {
+                    pieceMovementScript.setCanMoveRight(false);
                 }
                 break;
             case 2:
@@ -210,15 +311,12 @@ public class TPieceCollision : MonoBehaviour
 
     private void resetMovementBools()
     {
-        pieceMovementScript.setIsJumping(false);
         pieceMovementScript.setCanMoveLeft(true);
         pieceMovementScript.setCanMoveRight(true);
         pieceMovementScript.setCanRotateClockwise(true);
         pieceMovementScript.setCanRotateCounterClockwise(true);
-        pieceMovementScript.setCanWallKickC(true);
-        pieceMovementScript.setCanWallKickCC(true);
-        pieceMovementScript.setCanTwistC(true);
-        pieceMovementScript.setCanTwistC(true);
+        pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
+        pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
     }
 
     #endregion

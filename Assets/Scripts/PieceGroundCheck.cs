@@ -9,6 +9,8 @@ using UnityEngine;
 
 public class PieceGroundCheck : MonoBehaviour
 {
+
+    /*
     #region Private Serialized Field
 
     [SerializeField] private PieceMovement pieceMovementScript;
@@ -60,11 +62,11 @@ public class PieceGroundCheck : MonoBehaviour
         }
         if (isGrounded[0] || isGrounded[1] || isGrounded[2] || isGrounded[3])
         {
-            pieceMovementScript.setGrounded(true);
+            pieceMovementScript.setIsGrounded(true);
         }
         else
         {
-            pieceMovementScript.setGrounded(false);
+            pieceMovementScript.setIsGrounded(false);
         }
 
     }
@@ -76,4 +78,5 @@ public class PieceGroundCheck : MonoBehaviour
 
 
     #endregion
+    */
 }
