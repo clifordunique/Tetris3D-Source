@@ -99,7 +99,8 @@ public class PieceMovement : MonoBehaviour
             inputRight = true;
             inputRC = false;
             inputRCC = false;
-        } else if (Input.GetKeyDown("up"))
+        }
+        if (Input.GetKeyDown("up"))
         {
             inputLeft = false;
             inputRight = false;
@@ -179,12 +180,12 @@ public class PieceMovement : MonoBehaviour
                 leftDelay = true;
                 moveLeftTimer = 0;
             }
-            if (!movedLeft)
+            if (!movedLeft && canMoveLeft)
             {
                 moveLeft();
                 movedLeft = true;
             }
-            else if (leftDelay)
+            else if (leftDelay && canMoveLeft)
             {
                 moveLeftTimer += Time.deltaTime;
                 if (moveLeftTimer >= movementTime)
@@ -208,12 +209,12 @@ public class PieceMovement : MonoBehaviour
                 rightDelay = true;
                 moveRightTimer = 0;
             }
-            if (!movedRight)
+            if (!movedRight && canMoveRight)
             {
                 moveRight();
                 movedRight = true;
             }
-            else if (rightDelay)
+            else if (rightDelay && canMoveRight)
             {
                 moveRightTimer += Time.deltaTime;
                 if (moveRightTimer >= movementTime)

@@ -273,13 +273,13 @@ public class TPieceCollision : MonoBehaviour
             leftLeft2 = true;
         }
         bool rightTop3 = false;
-        Debug.DrawRay(new Vector3(tPieceRight.transform.position.x + 2, tPieceRight.transform.position.y + 1, tPieceRight.transform.position.z), left * 3, Color.magenta);
+        Debug.DrawRay(new Vector3(tPieceRight.transform.position.x + 2, tPieceRight.transform.position.y + 1, tPieceRight.transform.position.z), left * 3, Color.red);
         if (Physics.Raycast(new Vector3(tPieceRight.transform.position.x + 2, tPieceRight.transform.position.y + 1, tPieceRight.transform.position.z), left, 3, layerMask))
         {
             rightTop3 = true;
         }
         bool rightTopLeft13 = false;
-        Debug.DrawRay(new Vector3(tPieceRight.transform.position.x + 1, tPieceRight.transform.position.y + 1, tPieceRight.transform.position.z), left * 3, Color.magenta);
+        Debug.DrawRay(new Vector3(tPieceRight.transform.position.x + 1, tPieceRight.transform.position.y + 1, tPieceRight.transform.position.z), left * 3, Color.red);
         if (Physics.Raycast(new Vector3(tPieceRight.transform.position.x + 1, tPieceRight.transform.position.y + 1, tPieceRight.transform.position.z), left, 3, layerMask))
         {
             rightTopLeft13 = true;

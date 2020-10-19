@@ -50,7 +50,7 @@ public class SPieceCollision : MonoBehaviour
         sPieceRightBools = new bool[4];
     }
 
-    void FixedUpdate()
+    void Update()
     {
         pieceMovementScript.setIsGrounded(false);
         Vector3 down = transform.TransformDirection(Vector3.down);
@@ -259,6 +259,24 @@ public class SPieceCollision : MonoBehaviour
         {
             topRight13 = true;
         }
+        bool topUp2Right2 = false;
+        Debug.DrawRay(new Vector3(sPieceTop.transform.position.x - 1, sPieceTop.transform.position.y + 2, sPieceTop.transform.position.z), right * 2, Color.magenta);
+        if (Physics.Raycast(new Vector3(sPieceTop.transform.position.x - 1, sPieceTop.transform.position.y + 2, sPieceTop.transform.position.z), right, 2, layerMask))
+        {
+            topUp2Right2 = true;
+        }
+        bool leftUp1Right2 = false;
+        Debug.DrawRay(new Vector3(sPieceLeft.transform.position.x - 1, sPieceLeft.transform.position.y + 1, sPieceLeft.transform.position.z), right * 2, Color.magenta);
+        if (Physics.Raycast(new Vector3(sPieceLeft.transform.position.x - 1, sPieceLeft.transform.position.y + 1, sPieceLeft.transform.position.z), right, 2, layerMask))
+        {
+            leftUp1Right2 = true;
+        }
+        bool rightDown1Left2 = false;
+        Debug.DrawRay(new Vector3(sPieceRight.transform.position.x + 1, sPieceRight.transform.position.y - 1, sPieceRight.transform.position.z), left * 2, Color.magenta);
+        if (Physics.Raycast(new Vector3(sPieceRight.transform.position.x + 1, sPieceRight.transform.position.y - 1, sPieceRight.transform.position.z), left, 2, layerMask))
+        {
+            rightDown1Left2 = true;
+        }
         // Reverse
         bool leftRight2 = false;
         Debug.DrawRay(new Vector3(sPieceLeft.transform.position.x, sPieceLeft.transform.position.y, sPieceLeft.transform.position.z), right * 2, Color.magenta);
@@ -278,21 +296,49 @@ public class SPieceCollision : MonoBehaviour
         {
             topUp2Up1 = true;
         }
+        bool leftUp1Left2 = false;
+        Debug.DrawRay(new Vector3(sPieceLeft.transform.position.x + 1, sPieceLeft.transform.position.y + 1, sPieceLeft.transform.position.z), left * 2, Color.magenta);
+        if (Physics.Raycast(new Vector3(sPieceLeft.transform.position.x + 1, sPieceLeft.transform.position.y + 1, sPieceLeft.transform.position.z), left, 2, layerMask))
+        {
+            leftUp1Left2 = true;
+        }
+        bool leftUp2Right2 = false;
+        Debug.DrawRay(new Vector3(sPieceLeft.transform.position.x - 1, sPieceLeft.transform.position.y + 2, sPieceLeft.transform.position.z), right * 2, Color.magenta);
+        if (Physics.Raycast(new Vector3(sPieceLeft.transform.position.x - 1, sPieceLeft.transform.position.y + 2, sPieceLeft.transform.position.z), right, 2, layerMask))
+        {
+            leftUp2Right2 = true;
+        }
         //// Orientation 3
-        // LeftUp2 is covered earlier
-        // TopDown2 is covered earlier
         bool bottomDown2Right1 = false;
         Debug.DrawRay(new Vector3(sPieceBottom.transform.position.x, sPieceBottom.transform.position.y - 2, sPieceBottom.transform.position.z), right * 1, Color.cyan);
         if (Physics.Raycast(new Vector3(sPieceBottom.transform.position.x, sPieceBottom.transform.position.y - 2, sPieceBottom.transform.position.z), right, 1, layerMask))
         {
             bottomDown2Right1 = true;
         }
-        // Reverses are covered
+        bool leftDown1Down2 = false;
+        Debug.DrawRay(new Vector3(sPieceLeft.transform.position.x, sPieceLeft.transform.position.y - 1, sPieceLeft.transform.position.z), down * 2, Color.cyan);
+        if (Physics.Raycast(new Vector3(sPieceLeft.transform.position.x, sPieceLeft.transform.position.y - 1, sPieceLeft.transform.position.z), down, 2, layerMask))
+        {
+            leftDown1Down2 = true;
+        }
+        bool bottomUp2 = false;
+        Debug.DrawRay(new Vector3(sPieceBottom.transform.position.x, sPieceBottom.transform.position.y, sPieceBottom.transform.position.z), up * 2, Color.cyan);
+        if (Physics.Raycast(new Vector3(sPieceBottom.transform.position.x, sPieceBottom.transform.position.y, sPieceBottom.transform.position.z), up, 2, layerMask))
+        {
+            bottomUp2 = true;
+        }
+        // Reverses
         bool bottomDown2Left1 = false;
         Debug.DrawRay(new Vector3(sPieceBottom.transform.position.x, sPieceBottom.transform.position.y - 2, sPieceBottom.transform.position.z), left * 1, Color.cyan);
         if (Physics.Raycast(new Vector3(sPieceBottom.transform.position.x, sPieceBottom.transform.position.y - 2, sPieceBottom.transform.position.z), left, 1, layerMask))
         {
             bottomDown2Left1 = true;
+        }
+        bool rightUp2Up2 = false;
+        Debug.DrawRay(new Vector3(sPieceRight.transform.position.x, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), up * 2, Color.magenta);
+        if (Physics.Raycast(new Vector3(sPieceRight.transform.position.x, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), up, 2, layerMask))
+        {
+            rightUp2Up2 = true;
         }
         //// Orientation 4
         bool leftLeft2 = false;
@@ -302,26 +348,65 @@ public class SPieceCollision : MonoBehaviour
             leftLeft2 = true;
         }
         bool rightTop3 = false;
-        Debug.DrawRay(new Vector3(sPieceRight.transform.position.x + 2, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), left * 3, Color.magenta);
+        Debug.DrawRay(new Vector3(sPieceRight.transform.position.x + 2, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), left * 3, Color.red);
         if (Physics.Raycast(new Vector3(sPieceRight.transform.position.x + 2, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), left, 3, layerMask))
         {
             rightTop3 = true;
         }
         bool rightTopLeft13 = false;
-        Debug.DrawRay(new Vector3(sPieceRight.transform.position.x + 1, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), left * 3, Color.magenta);
+        Debug.DrawRay(new Vector3(sPieceRight.transform.position.x + 1, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), left * 3, Color.red);
         if (Physics.Raycast(new Vector3(sPieceRight.transform.position.x + 1, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), left, 3, layerMask))
         {
             rightTopLeft13 = true;
         }
-        // topUp2Up1 is covered
-        // topUp2 is also covered for mirror R2 5
-        // topDown2 is also covered for mirror R2 3
+        bool rightUp1Left2 = false;
+        Debug.DrawRay(new Vector3(sPieceRight.transform.position.x + 1, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), left * 2, Color.red);
+        if (Physics.Raycast(new Vector3(sPieceRight.transform.position.x + 1, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), left, 2, layerMask))
+        {
+            rightUp1Left2 = true;
+        }
+        bool rightUp2Right2 = false;
+        Debug.DrawRay(new Vector3(sPieceRight.transform.position.x - 1, sPieceRight.transform.position.y + 2, sPieceRight.transform.position.z), right * 2, Color.red);
+        if (Physics.Raycast(new Vector3(sPieceRight.transform.position.x - 1, sPieceRight.transform.position.y + 2, sPieceRight.transform.position.z), right, 2, layerMask))
+        {
+            rightUp2Right2 = true;
+        }
+        bool bottomUp2Left2 = false;
+        Debug.DrawRay(new Vector3(sPieceBottom.transform.position.x + 1, sPieceBottom.transform.position.y + 2, sPieceBottom.transform.position.z), left * 2, Color.red);
+        if (Physics.Raycast(new Vector3(sPieceBottom.transform.position.x + 1, sPieceBottom.transform.position.y + 2, sPieceBottom.transform.position.z), left, 2, layerMask))
+        {
+            bottomUp2Left2 = true;
+        }
+        bool bottomUp3Right2 = false;
+        Debug.DrawRay(new Vector3(sPieceBottom.transform.position.x - 1, sPieceBottom.transform.position.y + 3, sPieceBottom.transform.position.z), right * 2, Color.red);
+        if (Physics.Raycast(new Vector3(sPieceBottom.transform.position.x - 1, sPieceBottom.transform.position.y + 3, sPieceBottom.transform.position.z), right, 2, layerMask))
+        {
+            bottomUp3Right2 = true;
+        }
         // Reverse
         bool rightLeft2 = false;
         Debug.DrawRay(new Vector3(sPieceRight.transform.position.x, sPieceRight.transform.position.y, sPieceRight.transform.position.z), left * 2, Color.red);
         if (Physics.Raycast(new Vector3(sPieceRight.transform.position.x, sPieceRight.transform.position.y, sPieceRight.transform.position.z), left, 2, layerMask))
         {
             rightLeft2 = true;
+        }
+        bool rightUp1Right2 = false;
+        Debug.DrawRay(new Vector3(sPieceRight.transform.position.x - 1, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), right * 2, Color.red);
+        if (Physics.Raycast(new Vector3(sPieceRight.transform.position.x - 1, sPieceRight.transform.position.y + 1, sPieceRight.transform.position.z), right, 2, layerMask))
+        {
+            rightUp1Right2 = true;
+        }
+        bool bottomUp2Right2 = false;
+        Debug.DrawRay(new Vector3(sPieceBottom.transform.position.x - 1, sPieceBottom.transform.position.y + 2, sPieceBottom.transform.position.z), right * 2, Color.red);
+        if (Physics.Raycast(new Vector3(sPieceBottom.transform.position.x - 1, sPieceBottom.transform.position.y + 2, sPieceBottom.transform.position.z), right, 2, layerMask))
+        {
+            bottomUp2Right2 = true;
+        }
+        bool topDown2Left2 = false;
+        Debug.DrawRay(new Vector3(sPieceTop.transform.position.x + 1, sPieceTop.transform.position.y - 2, sPieceTop.transform.position.z), left * 2, Color.red);
+        if (Physics.Raycast(new Vector3(sPieceTop.transform.position.x + 1, sPieceTop.transform.position.y - 2, sPieceTop.transform.position.z), left, 2, layerMask))
+        {
+            topDown2Left2 = true;
         }
 
         #endregion
@@ -360,19 +445,19 @@ public class SPieceCollision : MonoBehaviour
                 if (!rightDown2)
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
-                }    
+                }
                 //// CounterClockwise Rotation tests
-                // Kick test 0R 3
+                // Kick test L0 3 MIRRORED
                 if (!sPieceTopBools[0] && !sPieceRightBools[1])
                 {
                     pieceMovementScript.setTranslationVectorCC(new Vector2(1, 1));
                 }
-                // Kick test 0R 2
+                // Kick test L0 2 MIRRORED
                 if (!rightDown2)
                 {
-                    pieceMovementScript.setTranslationVectorCC(new Vector2(-1, 0));
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(1, 0));
                 }
-                // Kick test 0R 1
+                // Kick test L0 1 MIRRORED
                 if (!sPieceBottomBools[1] && !sPieceTopBools[2])
                 {
                     pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
@@ -393,24 +478,56 @@ public class SPieceCollision : MonoBehaviour
                 pieceMovementScript.setCanRotateCounterClockwise(false);
                 //// Clockwise Rotation tests
                 // Kick test R2 5
-
+                if (!topUp2 && !topUp2Right2)
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(1, 2));
+                }
                 // Kick test R2 4
-
+                if (!leftUp1Right2 && !sPieceLeftBools[2])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(0, 2));
+                }
                 // Kick test R2 3
-
+                if (!rightDown1Left2 && !sPieceRightBools[3])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(1, -1));
+                }
                 // Kick test R2 2
-
-                //// CounterClockwise Rotation tests
-                // Kick test 0R 2
-
-                // Kick test L0 5 MIRRORED
-
-                // Kick test L0 3 MIRRORED
-
-                // Kick test L0 2 MIRRORED
-
+                if (!sPieceTopBools[3] && !sPieceBottomBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(1, 0));
+                }
                 // Kick test R2 1
-
+                if (!rightLeft2)
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
+                }
+                //// CounterClockwise Rotation tests
+                // Kick test 0R 5 MIRRORED
+                if (!leftUp1Right2 && !topUp2Right2)
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(1, 2));
+                }
+                // Kick test 0R 4 MIRRORED
+                if (!leftUp1Left2 && !leftUp2Right2)
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(0, 2));
+                }
+                // Kick test 0R 3 MIRRORED
+                if (!sPieceTopBools[3] && !sPieceBottomBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(1, -1));
+                }
+                // Kick test 0R 2 MIRRORED
+                if (!leftRight2)
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(1, 0));
+                }
+                // Kick test 0R 1 MIRRORED
+                if (!sPieceTopBools[0] && !sPieceBottomBools[2])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
+                }
                 //// Movement test
                 if (sPieceLeftBools[2] || sPieceBottomBools[2] || sPieceRightBools[2])
                 {
@@ -427,21 +544,56 @@ public class SPieceCollision : MonoBehaviour
                 pieceMovementScript.setCanRotateCounterClockwise(false);
                 //// Clockwise Rotation tests
                 // Kick test 2L 5
-
+                if (!leftDown1Down2 && !sPieceTopBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(1, -2));
+                }
                 // Kick test 2L 4
-
+                if (!topDown2 && !sPieceRightBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(0, -2));
+                }
+                // Kick test 2L 3
+                if (!bottomUp2 && !sPieceLeftBools[0])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(1, 1));
+                }
                 // Kick test 2L 2
-
+                if (!sPieceBottomBools[0] && !sPieceTopBools[3])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(1, 0));
+                }
+                if (!rightUp2)
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
+                }
                 // Skipping Kick test 2L 1 because it's universal
                 //// CounterClockwise Rotation tests
-                // Kick test 2L 5
-
-                // Kick test 2L 4
-
-                // Kick test 2L 2
-
-                // Kick test 2L 1
-
+                // Kick test R2 5 MIRRORED
+                if (!topDown2 && !sPieceRightBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(-1, -2));
+                }
+                // Kick test R2 4 MIRRORED
+                if (!leftDown1Down2 && !sPieceTopBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(0, -2));
+                }
+                // Kick test R2 3 MIRRORED
+                if (!rightUp2Up2 && !sPieceBottomBools[0])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(-1, 1));
+                }
+                // Kick test R2 2 MIRRORED
+                if (!rightUp2)
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(-1, 0));
+                }
+                // Kick test R2 1 MIRRORED
+                if (!sPieceBottomBools[0] && !sPieceTopBools[3])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
+                }
                 //// Movement tests
                 if (sPieceRightBools[2] || sPieceBottomBools[2])
                 {
@@ -458,20 +610,56 @@ public class SPieceCollision : MonoBehaviour
                 pieceMovementScript.setCanRotateCounterClockwise(false);
                 //// Clockwise Rotation tests
                 // Kick test L0 5
-
+                if (!rightUp1Left2 && !rightUp2Right2)
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(-1, 2));
+                }
+                // Kick test L0 4
+                if (!bottomUp2Left2 && !bottomUp3Right2)
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(0, 2));
+                }
                 // Kick test L0 3
-
+                if (!leftLeft2)
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(-1, -1));
+                }
                 // Kick test L0 2
-
-                //// CounterClockwise Rotation tests
-                // Kick test R2 5 MIRRORED
-
-                // Kick test R2 4 MIRRORED
-
-                // Kick test R2 3 MIRRORED
-
+                if (!sPieceBottomBools[0] && !sPieceTopBools[2])
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(-1, 0));
+                }
                 // Kick test L0 1
-
+                if (!rightRight2)
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
+                }
+                //// CounterClockwise Rotation tests
+                // Kick test 2L 5 MIRRORED
+                if (!rightUp1Right2 && !sPieceRightBools[2])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(-1, 2));
+                }
+                // Kick test 2L 4 MIRRORED
+                if (!bottomUp2Right2 && !sPieceBottomBools[0])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(0, 2));
+                }
+                // Kick test 2L 3 MIRRORED
+                if (!sPieceTopBools[1] && !topDown2Left2)
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(-1, -1));
+                }
+                // Kick test 2L 2 MIRRORED
+                if (!leftLeft2)
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(-1, 0));
+                }
+                // Kick test 2L 1 MIRRORED
+                if (!sPieceBottomBools[3] && !sPieceTopBools[1])
+                {
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
+                }
                 //// Movement Tests
                 if (sPieceRightBools[2] || sPieceTopBools[2] || sPieceLeftBools[2])
                 {
