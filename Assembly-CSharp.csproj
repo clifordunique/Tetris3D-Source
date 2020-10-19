@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\SPieceCollision.cs" />
     <Compile Include="Assets\Scripts\TPieceCollision.cs" />
+    <Compile Include="Assets\Scripts\ZPieceCollision.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/lucas/Documents/Unity Projects/Tetris(3D)/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

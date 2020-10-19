@@ -11,7 +11,7 @@ public class SPieceCollision : MonoBehaviour
 {
     #region Private Serialized Field
 
-    [SerializeField] private PieceMovement pieceMovementScript;
+    private PieceMovement pieceMovementScript;
     [SerializeField] private GameObject sPieceTransformHandle;
     [SerializeField] private GameObject sPieceTop;
     [SerializeField] private GameObject sPieceBottom;
@@ -48,6 +48,7 @@ public class SPieceCollision : MonoBehaviour
         sPieceBottomBools = new bool[4];
         sPieceLeftBools = new bool[4];
         sPieceRightBools = new bool[4];
+        pieceMovementScript = this.GetComponent<PieceMovement>();
     }
 
     void Update()
@@ -421,7 +422,7 @@ public class SPieceCollision : MonoBehaviour
                 pieceMovementScript.setCanRotateClockwise(false);
                 pieceMovementScript.setCanRotateCounterClockwise(false);
                 //// Clockwise Rotation tests
-                // Kick test 0R 5 (The triple twist)
+                // Kick test 0R 5
                 if (!leftDown2 && !bottomDown1Down2)
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(-1, -2));
@@ -437,7 +438,7 @@ public class SPieceCollision : MonoBehaviour
                     pieceMovementScript.setTranslationVectorC(new Vector2(-1, 1));
                 }
                 // Kick test 0R 2
-                if (!sPieceTopBools[2] && !sPieceBottomBools[1])
+                if (!sPieceBottomBools[1] && !sPieceTopBools[2])
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(-1, 1));
                 }
@@ -563,6 +564,7 @@ public class SPieceCollision : MonoBehaviour
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(1, 0));
                 }
+                // Kick test 2L 1
                 if (!rightUp2)
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));

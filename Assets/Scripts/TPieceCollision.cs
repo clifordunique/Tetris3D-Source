@@ -11,7 +11,7 @@ public class TPieceCollision : MonoBehaviour
 {
     #region Private Serialized Field
 
-    [SerializeField] private PieceMovement pieceMovementScript;
+    private PieceMovement pieceMovementScript;
     [SerializeField] private GameObject tPieceTransformHandle;
     [SerializeField] private GameObject tPieceTop;
     [SerializeField] private GameObject tPieceBottom;
@@ -48,9 +48,10 @@ public class TPieceCollision : MonoBehaviour
         tPieceBottomBools = new bool[4];
         tPieceLeftBools = new bool[4];
         tPieceRightBools = new bool[4];
+        pieceMovementScript = this.GetComponent<PieceMovement>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         pieceMovementScript.setIsGrounded(false);
         Vector3 down = transform.TransformDirection(Vector3.down);
