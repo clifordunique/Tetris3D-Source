@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\PieceMovement.cs" />
     <Compile Include="Assets\Scripts\PieceSpawner.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Scripts\SPieceCollision.cs" />
     <Compile Include="Assets\Scripts\TPieceCollision.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Reference Include="Unity.Timeline.Editor">

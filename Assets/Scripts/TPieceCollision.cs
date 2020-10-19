@@ -50,8 +50,7 @@ public class TPieceCollision : MonoBehaviour
         tPieceRightBools = new bool[4];
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         pieceMovementScript.setIsGrounded(false);
         Vector3 down = transform.TransformDirection(Vector3.down);
@@ -102,44 +101,44 @@ public class TPieceCollision : MonoBehaviour
             if (Physics.Raycast(currentCube.transform.position, up, 1, layerMask))
             {
                 temporary[0] = true;
-                Debug.DrawRay(currentCube.transform.position, transform.TransformDirection(up) * 1, Color.blue);
+                Debug.DrawRay(currentCube.transform.position, up * 1, Color.blue);
             }
             else
             {
                 temporary[0] = false;
-                Debug.DrawRay(currentCube.transform.position, transform.TransformDirection(up) * 1, Color.white);
+                Debug.DrawRay(currentCube.transform.position, up * 1, Color.white);
             }
             if (Physics.Raycast(currentCube.transform.position, down, 1, layerMask))
             {
                 temporary[1] = true;
-                Debug.DrawRay(currentCube.transform.position, transform.TransformDirection(down) * 1, Color.blue);
+                Debug.DrawRay(currentCube.transform.position, down * 1, Color.blue);
                 // Here's where ground checking is easily done!
                 pieceMovementScript.setIsGrounded(true);
             }
             else
             {
                 temporary[1] = false;
-                Debug.DrawRay(currentCube.transform.position, transform.TransformDirection(down) * 1, Color.white);
+                Debug.DrawRay(currentCube.transform.position, down * 1, Color.white);
             }
             if (Physics.Raycast(currentCube.transform.position, left, 1, layerMask))
             {
                 temporary[2] = true;
-                Debug.DrawRay(currentCube.transform.position, transform.TransformDirection(left) * 1, Color.blue);
+                Debug.DrawRay(currentCube.transform.position, left * 1, Color.blue);
             }
             else
             {
                 temporary[2] = false;
-                Debug.DrawRay(currentCube.transform.position, transform.TransformDirection(left) * 1, Color.white);
+                Debug.DrawRay(currentCube.transform.position, left * 1, Color.white);
             }
             if (Physics.Raycast(currentCube.transform.position, right, 1, layerMask))
             {
                 temporary[3] = true;
-                Debug.DrawRay(currentCube.transform.position, transform.TransformDirection(right) * 1, Color.blue);
+                Debug.DrawRay(currentCube.transform.position, right * 1, Color.blue);
             }
             else
             {
                 temporary[3] = false;
-                Debug.DrawRay(currentCube.transform.position, transform.TransformDirection(right) * 1, Color.white);
+                Debug.DrawRay(currentCube.transform.position, right * 1, Color.white);
             }
             switch(i)
             {
@@ -497,10 +496,10 @@ public class TPieceCollision : MonoBehaviour
                 {
                     pieceMovementScript.setTranslationVectorCC(new Vector2(-1, 2));
                 }
-                // Kick test L0 3
-                if (!rightLeft2)
+                // Kick test R2 4 MIRRORED
+                if (!rightTop3)
                 {
-                    pieceMovementScript.setTranslationVectorCC(new Vector2(-1, -1));
+                    pieceMovementScript.setTranslationVectorCC(new Vector2(0, 2));
                 }
                 // Kick test R2 3 MIRRORED
                 if (!leftLeft2 && !topDown2)
@@ -543,5 +542,3 @@ public class TPieceCollision : MonoBehaviour
 
     #endregion
 }
-
-// El Psy Kongroo

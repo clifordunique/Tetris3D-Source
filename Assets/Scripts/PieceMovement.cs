@@ -90,20 +90,26 @@ public class PieceMovement : MonoBehaviour
         if (Input.GetKey("left"))
         {
             inputLeft = true;
-        }
-
-        if (Input.GetKey("right"))
+            inputRight = false;
+            inputRC = false;
+            inputRCC = false;
+        } else if (Input.GetKey("right"))
         {
+            inputLeft = false;
             inputRight = true;
-        }
-
-        if (Input.GetKeyDown("up"))
+            inputRC = false;
+            inputRCC = false;
+        } else if (Input.GetKeyDown("up"))
         {
+            inputLeft = false;
+            inputRight = false;
             inputRC = true;
-        }
-
-        if (Input.GetKeyDown("z"))
+            inputRCC = false;
+        } else if (Input.GetKeyDown("z"))
         {
+            inputLeft = false;
+            inputRight = false;
+            inputRC = false;
             inputRCC = true;
         }
     }
@@ -140,7 +146,7 @@ public class PieceMovement : MonoBehaviour
             {
                 rotateClockwise(translationVectorC);
             }
-        }
+        } 
 
         if (inputRCC)
         {
