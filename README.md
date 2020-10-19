@@ -9,10 +9,10 @@ Completed Tasks
 - [x] Left-Right movement system.
 - [x] Basic gravity
 - [x] Basic RS (Rotation System) collision data using raycasts
-- [ ] SRS (Super Rotation System) collision data using raycasts
+- [x] SRS (Super Rotation System) collision data using raycasts
 - [ ] Finalizing SRS data for all 7 pieces
-- [ ] Prefabs for all 7 pieces
-- [ ] Piece spawning with correct prefab/script referencing
+- [ ] Prefabs for all 7 pieces with landing mechanics
+- [ ] Piece pooling with proper management
 - [ ] Piece randomization on a 7-bag system
 - [ ] Advanced gravity system
 - [ ] Points and line clears
