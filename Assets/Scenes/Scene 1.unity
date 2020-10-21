@@ -3577,6 +3577,7 @@ GameObject:
   - component: {fileID: 2029896026}
   - component: {fileID: 2029896027}
   - component: {fileID: 2029896028}
+  - component: {fileID: 2029896029}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -3643,12 +3644,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157d6a019e51f4d478faa568bbf59980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sPieceTransformHandle: {fileID: 2025179081677992552}
-  sPieceTop: {fileID: 2025179081480735256}
-  sPieceBottom: {fileID: 2025179081566278839}
-  sPieceLeft: {fileID: 2025179082112102354}
-  sPieceRight: {fileID: 2025179082541673542}
+  sPieceTransformHandle: {fileID: 0}
+  sPieceTop: {fileID: 0}
+  sPieceBottom: {fileID: 0}
+  sPieceLeft: {fileID: 0}
+  sPieceRight: {fileID: 0}
 --- !u!114 &2029896028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029896023}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be51758208e07314b80f38434d0d7111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zPieceTransformHandle: {fileID: 0}
+  zPieceTop: {fileID: 0}
+  zPieceBottom: {fileID: 0}
+  zPieceLeft: {fileID: 0}
+  zPieceRight: {fileID: 0}
+--- !u!114 &2029896029
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3657,14 +3675,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2029896023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be51758208e07314b80f38434d0d7111, type: 3}
+  m_Script: {fileID: 11500000, guid: 44217976335f0ab46a1291704b84425f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zPieceTransformHandle: {fileID: 2025179081677992552}
-  zPieceTop: {fileID: 2025179081480735256}
-  zPieceBottom: {fileID: 2025179081566278839}
-  zPieceLeft: {fileID: 2025179082112102354}
-  zPieceRight: {fileID: 2025179082541673542}
+  jPieceTransformHandle: {fileID: 2025179081677992552}
+  jPieceTop: {fileID: 2025179081480735256}
+  jPieceBottom: {fileID: 2025179081566278839}
+  jPieceLeft: {fileID: 2025179082112102354}
+  jPieceRight: {fileID: 2025179082541673542}
 --- !u!1 &2069992752
 GameObject:
   m_ObjectHideFlags: 0
