@@ -734,7 +734,6 @@ public class JPieceCollision : MonoBehaviour
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
                 }
-                // Skipping Kick test 2L 1 because it's universal
                 //// CounterClockwise Rotation tests
                 // Kick test R2 5 MIRRORED
                 if (!rightDown3 && !jPieceBottomBools[1])

@@ -569,7 +569,6 @@ public class SPieceCollision : MonoBehaviour
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
                 }
-                // Skipping Kick test 2L 1 because it's universal
                 //// CounterClockwise Rotation tests
                 // Kick test R2 5 MIRRORED
                 if (!topDown2 && !sPieceRightBools[1])
