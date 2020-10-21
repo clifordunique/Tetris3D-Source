@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\CheckPoint.cs" />
     <Compile Include="Assets\Scripts\Controls.cs" />
     <Compile Include="Assets\Scripts\GravityHandler.cs" />
+    <Compile Include="Assets\Scripts\JPieceCollision.cs" />
     <Compile Include="Assets\Scripts\PieceCollision.cs" />
     <Compile Include="Assets\Scripts\PieceGroundCheck.cs" />
     <Compile Include="Assets\Scripts\PieceMovement.cs" />
