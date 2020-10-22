@@ -4,13 +4,13 @@ Yes, I plan on implementing all of the cool SRS stuff like spinning, twisting, a
 </br>Wikis and resources I'll be using:
 https://harddrop.com/wiki/SRS
 
-Last edit: 10/16/2020</br>
+Last edit: 10/22/2020</br>
 Completed Tasks
 - [x] Left-Right movement system.
 - [x] Basic gravity
 - [x] Basic RS (Rotation System) collision data using raycasts
 - [x] SRS (Super Rotation System) collision data using raycasts
-- [ ] Finalizing SRS data for all 7 pieces
+- [x] Finalizing SRS data for all 7 pieces
 - [ ] Prefabs for all 7 pieces with landing mechanics
 - [ ] Piece pooling with proper management
 - [ ] Piece randomization on a 7-bag system
