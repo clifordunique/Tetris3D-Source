@@ -11,9 +11,9 @@ Completed Tasks
 - [x] Basic RS (Rotation System) collision data using raycasts
 - [x] SRS (Super Rotation System) collision data using raycasts
 - [x] Finalizing SRS data for all 7 pieces
-- [ ] Prefabs for all 7 pieces with landing mechanics
-- [ ] Piece pooling with proper management
-- [ ] Piece randomization on a 7-bag system
+- [x] Prefabs for all 7 pieces with landing mechanics
+- [x] Piece pooling with proper management
+- [x] Piece randomization on a 7-bag system
 - [ ] Advanced gravity system
 - [ ] Points and line clears
 - [ ] Pizzazz
