@@ -69,8 +69,10 @@
     <Compile Include="Assets\Scripts\IPieceCollision.cs" />
     <Compile Include="Assets\Scripts\JPieceCollision.cs" />
     <Compile Include="Assets\Scripts\LPieceCollision.cs" />
+    <Compile Include="Assets\Scripts\OPieceCollision.cs" />
     <Compile Include="Assets\Scripts\PieceCollision.cs" />
     <Compile Include="Assets\Scripts\PieceGroundCheck.cs" />
+    <Compile Include="Assets\Scripts\PieceManager.cs" />
     <Compile Include="Assets\Scripts\PieceMovement.cs" />
     <Compile Include="Assets\Scripts\PieceSpawner.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />

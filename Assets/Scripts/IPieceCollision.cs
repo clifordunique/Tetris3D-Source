@@ -235,11 +235,11 @@ public class IPieceCollision : MonoBehaviour
                     pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
                 }
                 //// Movement test
-                if (iPieceLeftBools[2] || iPieceTopBools[2])
+                if (iPieceLeftBools[2])
                 {
                     pieceMovementScript.setCanMoveLeft(false);
                 }
-                if (iPieceRightBools[3] || iPieceTopBools[3])
+                if (iPieceRightBools[3])
                 {
                     pieceMovementScript.setCanMoveRight(false);
                 }
@@ -301,11 +301,11 @@ public class IPieceCollision : MonoBehaviour
                     pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
                 }
                 //// Movement test
-                if (iPieceRightBools[2] || iPieceLeftBools[2] || iPieceBottomBools[2])
+                if (iPieceBottomBools[2] || iPieceLeftBools[2] || iPieceRightBools[2] || iPieceTopBools[2])
                 {
                     pieceMovementScript.setCanMoveLeft(false);
                 }
-                if (iPieceTopBools[3] || iPieceLeftBools[3] || iPieceBottomBools[3])
+                if (iPieceBottomBools[3] || iPieceLeftBools[3] || iPieceRightBools[3] || iPieceTopBools[3])
                 {
                     pieceMovementScript.setCanMoveRight(false);
                 }
@@ -367,11 +367,11 @@ public class IPieceCollision : MonoBehaviour
                     pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
                 }
                 //// Movement tests
-                if (iPieceRightBools[2] || iPieceTopBools[2])
+                if (iPieceRightBools[2])
                 {
                     pieceMovementScript.setCanMoveLeft(false);
                 }
-                if (iPieceLeftBools[3] || iPieceTopBools[3])
+                if (iPieceLeftBools[3])
                 {
                     pieceMovementScript.setCanMoveRight(false);
                 }
@@ -434,11 +434,11 @@ public class IPieceCollision : MonoBehaviour
                     pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
                 }
                 //// Movement Tests
-                if (iPieceBottomBools[2] || iPieceTopBools[2] || iPieceLeftBools[2])
+                if (iPieceBottomBools[2] || iPieceLeftBools[2] || iPieceRightBools[2] || iPieceTopBools[2])
                 {
                     pieceMovementScript.setCanMoveLeft(false);
                 }
-                if (iPieceLeftBools[3] || iPieceBottomBools[3] || iPieceRightBools[3])
+                if (iPieceBottomBools[3] || iPieceLeftBools[3] || iPieceRightBools[3] || iPieceTopBools[3])
                 {
                     pieceMovementScript.setCanMoveRight(false);
                 }
