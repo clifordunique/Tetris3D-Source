@@ -31,12 +31,6 @@ public class JPieceCollision : MonoBehaviour
 
     #endregion
 
-    #region Public Fields
-
-
-
-    #endregion
-
     #region Monobehaviour Callbacks
 
     // Start is called before the first frame update
@@ -68,6 +62,8 @@ public class JPieceCollision : MonoBehaviour
         if (jPieceTransformHandle.transform.rotation.eulerAngles.z == 90)
             orientation = 4;
 
+        PieceMovement.distanceDown = 90;
+
         // Collision Checks
         for (int i = 0; i < 4; i++)
         {
@@ -91,6 +87,18 @@ public class JPieceCollision : MonoBehaviour
                     Debug.Log("Error with switch #1 of a CollisionScript!");
                     break;
             }
+
+            #region Shortest Distance Down
+
+            RaycastHit hit;
+            float distance = 90;
+            if (Physics.Raycast(currentCube.transform.position, down, out hit, layerMask))
+            {
+                distance = hit.distance;
+            }
+            PieceMovement.distanceDown = Mathf.Min(PieceMovement.distanceDown, distance);
+
+            #endregion
 
             // Note!
             // All collisions won't take into account the cubes of the current piece. IE A T-Piece Top won't care about a T-Piece Bottom being below it.
@@ -361,7 +369,7 @@ public class JPieceCollision : MonoBehaviour
         Debug.DrawRay(new Vector3(jPieceLeft.transform.position.x + 1, jPieceLeft.transform.position.y + 2, jPieceLeft.transform.position.z), left * 2, Color.magenta);
         if (Physics.Raycast(new Vector3(jPieceLeft.transform.position.x + 1, jPieceLeft.transform.position.y + 2, jPieceLeft.transform.position.z), left, 2, layerMask))
         {
-            leftUp1Left2 = true;
+            leftUp2Left2 = true;
         }
         bool bottomUp3Left2 = false;
         Debug.DrawRay(new Vector3(jPieceBottom.transform.position.x + 1, jPieceBottom.transform.position.y + 3, jPieceBottom.transform.position.z), left * 2, Color.magenta);

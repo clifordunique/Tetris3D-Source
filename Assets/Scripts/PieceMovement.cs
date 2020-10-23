@@ -12,16 +12,26 @@ using UnityEngine.XR.WSA;
  * This class is freaking epic.
 */
 
+// Also, WallKicks and Twists are advanced Tetris moves using
+// a Super Rotation System. I coded them in, because I'm a badass.
+
 public class PieceMovement : MonoBehaviour
 {
+    #region Static Field
+
+    // I don't usually like to use static variables for things, but there's a time and place for everything.
+    public static float distanceDown = 90f;
+
+    #endregion
 
     #region Private Serialized (Or Get/Set) Field
 
     [Header("Seralized Fields")]
     [SerializeField] private float gravityTime = 1f;
+    [SerializeField] private float landingTime = 1f;
     [SerializeField] private float movementTime = 0.1f;
+    [SerializeField] private float leftRightSlightDelay = 0.05f;
     [SerializeField] private float softDropTime = 0.1f;
-    //[SerializeField] private GameObject movementChecks;
 
     // Gets and Sets
     private bool canMoveLeft = true;
@@ -30,21 +40,25 @@ public class PieceMovement : MonoBehaviour
     private bool canRotateCounterClockwise = true;
     private Vector2 translationVectorC = new Vector2(0,0);
     private Vector2 translationVectorCC = new Vector2(0, 0);
-    // WallKicks and Twists are advanced Tetris moves. I coded them in because I'm a badass.
 
     #endregion
 
     #region Private Fields
 
+    private PieceManager pieceManager;
+
     // Fields for gravity movement
     private float gravityTimer = 0f;
+    private float softDropTimer = 0f;
+
+    // Fields for landing
+    private float landingTimer = 0f;
 
     // Fields for input bools
     private bool inputLeft = false;
     private bool inputRight = false;
     private bool inputRC = false;
     private bool inputRCC = false;
-    //private bool inputHold = false;
 
     // Fields for moving left/right
     private bool isGrounded = false;
@@ -54,6 +68,7 @@ public class PieceMovement : MonoBehaviour
     private bool leftDelay = false;
     private bool movedRight = false;
     private bool rightDelay = false;
+    private bool isSoftDropping = false;
     private float moveLeftTimer = 0f;
     private float moveRightTimer = 0f;
 
@@ -71,22 +86,29 @@ public class PieceMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        pieceManager = GetComponent<PieceManager>();
     }
 
-    // Due to errors where input would cause duplicate maneuvers (double jumping a T-Piece),
-    // Input will be grabbed in Update() but processed in FixedUpdate()
     void Update()
     {
-        // Gravity Handler
-        if (!isGrounded)
-        gravityTimer += Time.deltaTime;
-        if (gravityTimer >= gravityTime && !isGrounded)
-        {
-            currentPiece.transform.Translate(new Vector3 (0, -1, 0), Space.World);
-            gravityTimer = 0;
-        }
+        // Show the ghost piece
+        pieceManager.showGhostPiece();
 
+
+        // Grabbing Inputs
+        if (Input.GetKeyDown("space"))
+        {
+            currentPiece.transform.Translate(new Vector3(0, 0.5f - Mathf.Abs(distanceDown), 0), Space.World);
+            landPiece();
+        }
+        if (Input.GetKey("down"))
+        {
+            isSoftDropping = true;
+        }
+        else
+        {
+            isSoftDropping = false;
+        }
         if (Input.GetKey("left"))
         {
             inputLeft = true;
@@ -100,7 +122,7 @@ public class PieceMovement : MonoBehaviour
             inputRC = false;
             inputRCC = false;
         }
-        if (Input.GetKeyDown("up"))
+        if (Input.GetKeyDown("up") || Input.GetKeyDown("x"))
         {
             inputLeft = false;
             inputRight = false;
@@ -115,8 +137,37 @@ public class PieceMovement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
+        // Gravity Handler
+        if (!isGrounded)
+            gravityTimer += Time.deltaTime;
+        if (gravityTimer >= gravityTime && !isGrounded)
+        {
+            currentPiece.transform.Translate(new Vector3(0, -1, 0), Space.World);
+            gravityTimer = 0;
+        }
+
+        if (isSoftDropping)
+        {
+            softDropTimer += Time.deltaTime;
+            if (softDropTimer >= softDropTime && !isGrounded)
+            {
+                currentPiece.transform.Translate(new Vector3(0, -1, 0), Space.World);
+                softDropTimer = 0;
+            }
+        }
+
+        // Piece Landing Handler
+        if (isGrounded)
+        {
+            landingTimer += Time.deltaTime;
+        }
+        if (landingTimer >= landingTime && isGrounded)
+        {
+            landPiece();
+        }
+
         if (inputLeft)
         {
             leftMovementHandler();
@@ -166,6 +217,12 @@ public class PieceMovement : MonoBehaviour
 
     #region Private Methods
 
+    private void landPiece()
+    {
+        pieceManager.instantiateDeadPiece();
+        distanceDown = 90f;
+    }
+
     #region Code for left and right movement was thrown down here to tidy things up
 
     private void leftMovementHandler()
@@ -175,7 +232,7 @@ public class PieceMovement : MonoBehaviour
         {
             moveLeftTimer += Time.deltaTime;
             // Add some delay
-            if (moveLeftTimer >= 0.2f)
+            if (moveLeftTimer >= leftRightSlightDelay)
             {
                 leftDelay = true;
                 moveLeftTimer = 0;
@@ -204,7 +261,7 @@ public class PieceMovement : MonoBehaviour
         {
             moveRightTimer += Time.deltaTime;
             // Add some delay
-            if (moveRightTimer >= 0.2f)
+            if (moveRightTimer >= leftRightSlightDelay)
             {
                 rightDelay = true;
                 moveRightTimer = 0;
@@ -230,22 +287,26 @@ public class PieceMovement : MonoBehaviour
 
     private void moveLeft()
     {
+        landingTimer = 0;
         currentPiece.transform.Translate(new Vector3(-1, 0, 0), Space.World);
     }
 
     private void moveRight()
     {
+        landingTimer = 0;
         currentPiece.transform.Translate(new Vector3(1, 0, 0), Space.World);
     }
 
     private void rotateClockwise(Vector2 translation)
     {
+        landingTimer = 0;
         currentPiece.transform.Translate(new Vector3(translation.x, translation.y, 0), Space.World);
         currentPiece.transform.Rotate(new Vector3(0, 0, -90));
     }
 
     private void rotateCounterClockwise(Vector2 translation)
     {
+        landingTimer = 0;
         currentPiece.transform.Translate(new Vector3(translation.x, translation.y, 0), Space.World);
         currentPiece.transform.Rotate(new Vector3(0, 0, 90));
     }

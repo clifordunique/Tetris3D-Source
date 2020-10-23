@@ -31,12 +31,6 @@ public class TPieceCollision : MonoBehaviour
 
     #endregion
 
-    #region Public Fields
-
-
-
-    #endregion
-
     #region Monobehaviour Callbacks
 
     // Start is called before the first frame update
@@ -68,6 +62,8 @@ public class TPieceCollision : MonoBehaviour
         if (tPieceTransformHandle.transform.rotation.eulerAngles.z == 90)
             orientation = 4;
 
+        PieceMovement.distanceDown = 90;
+
         // Collision Checks
         for (int i = 0; i < 4; i++)
         {
@@ -91,6 +87,18 @@ public class TPieceCollision : MonoBehaviour
                     Debug.Log("Error with switch #1 of a CollisionScript!");
                     break;
             }
+
+            #region Shortest Distance Down
+
+            RaycastHit hit;
+            float distance = 90;
+            if (Physics.Raycast(currentCube.transform.position, down, out hit, layerMask))
+            {
+                distance = hit.distance;
+            }
+            PieceMovement.distanceDown = Mathf.Min(PieceMovement.distanceDown, distance);
+
+            #endregion
 
             // Note!
             // All collisions won't take into account the cubes of the current piece. IE A T-Piece Top won't care about a T-Piece Bottom being below it.
