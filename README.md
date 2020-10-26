@@ -14,6 +14,6 @@ Completed Tasks
 - [x] Prefabs for all 7 pieces with landing mechanics
 - [x] Piece pooling with proper management
 - [x] Piece randomization on a 7-bag system
-- [ ] Advanced gravity system
+- [ ] ~~Advanced gravity system~~ Put off until further notice.
 - [ ] Points and line clears
 - [ ] Pizzazz
