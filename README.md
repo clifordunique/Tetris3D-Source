@@ -16,4 +16,4 @@ Completed Tasks
 - [x] Piece randomization on a 7-bag system
 - [ ] ~~Advanced gravity system~~ Put off until further notice.
 - [ ] Points and line clears
-- [ ] Pizzazz
+- [ ] Cleaning code (removing unused fields and simplifying logic)
