@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CurrentPiece
   - Collider
+  - Row
   layers:
   - Default
   - TransparentFX

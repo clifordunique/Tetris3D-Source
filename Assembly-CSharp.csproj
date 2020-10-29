@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\PieceSpawner.cs" />
     <Compile Include="Assets\Scripts\PieceVisual.cs" />
     <Compile Include="Assets\Scripts\Row.cs" />
+    <Compile Include="Assets\Scripts\RowManager.cs" />
     <Compile Include="Assets\Scripts\SceneManage.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />

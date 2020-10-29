@@ -89,7 +89,24 @@ public class Row : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, Vector3.back, out hit))
             {
-                Destroy(hit.transform.gameObject);
+                try
+                {
+                    GameObject temp = hit.transform.parent.gameObject;
+                    hit.transform.parent.DetachChildren();
+                    Destroy(temp);
+                }
+                catch
+                {
+                    
+                }
+                try
+                {
+                    Destroy(hit.transform.gameObject);
+                }
+                catch
+                {
+                    Debug.Log("Couldn't destroy a gameobject in the row's clear() method");
+                }
             }
         }
     }
