@@ -320,6 +320,7 @@ public class TPieceCollision : MonoBehaviour
                 if (!leftDown3 && !leftDown2Right1 && tPieceLeftBools[0])
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(-1, -2));
+                    PieceMovement.isSpinning = true;
                 }
                 // Kick test 0R 3
                 if (!leftUp2 && tPieceLeftBools[1] && tPieceBottomBools[1])
@@ -337,6 +338,7 @@ public class TPieceCollision : MonoBehaviour
                 if (!rightDown3 && !rightDown2Left1 && !tPieceRightBools[1])
                 {
                     pieceMovementScript.setTranslationVectorCC(new Vector2(1, -2));
+                    PieceMovement.isSpinning = true;
                 }
                 // Kick test 0R 3
                 if (!rightUp2 && tPieceRightBools[1] && tPieceBottomBools[1])
@@ -353,6 +355,10 @@ public class TPieceCollision : MonoBehaviour
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
                     pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
+                    if (tPieceLeftBools[0] || tPieceRightBools[0])
+                    {
+                        PieceMovement.isSpinning = true;
+                    }
                 }
                 //// Movement test
                 if (tPieceLeftBools[2] || tPieceTopBools[2])
@@ -379,11 +385,7 @@ public class TPieceCollision : MonoBehaviour
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(0, 2));
                 }
-                // Kick test R2 3
-                if (!rightRight2 && !topDown2)
-                {
-                    pieceMovementScript.setTranslationVectorC(new Vector2(1, -1));
-                }
+                // Order change...
                 // Kick test R2 2
                 if (!tPieceTopBools[3] && !tPieceTopBools[1])
                 {
@@ -405,6 +407,12 @@ public class TPieceCollision : MonoBehaviour
                 {
                     pieceMovementScript.setTranslationVectorCC(new Vector2(1, -1));
                 }
+                // Kick test R2 3
+                if (!rightRight2 && !topDown2)
+                {
+                    pieceMovementScript.setTranslationVectorC(new Vector2(1, -1));
+                    PieceMovement.isSpinning = true;
+                }
                 // Kick test L0 2 MIRRORED
                 if (!tPieceLeftBools[3] && !tPieceTopBools[3])
                 {
@@ -415,6 +423,10 @@ public class TPieceCollision : MonoBehaviour
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
                     pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
+                    if (tPieceTopBools[0] || tPieceLeftBools[2])
+                    {
+                        PieceMovement.isSpinning = true;
+                    }
                 }
                 //// Movement test
                 if (tPieceLeftBools[2] || tPieceBottomBools[2] || tPieceRightBools[2])
@@ -442,32 +454,36 @@ public class TPieceCollision : MonoBehaviour
                     pieceMovementScript.setTranslationVectorC(new Vector2(0, -2));
                 }
                 // Kick test 2L 2
-                if (!tPieceRightBools[0] && !tPieceRightBools[1])
+                if (!tPieceLeftBools[0] && !tPieceLeftBools[1])
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(1, 0));
                 }
                 // Skipping Kick test 2L 1 because it's universal
                 //// CounterClockwise Rotation tests
-                // Kick test 2L 5
+                // Kick test R2 5 MIRRORED
                 if (!leftDown3 && !tPieceTopBools[1])
                 {
                     pieceMovementScript.setTranslationVectorCC(new Vector2(-1, -2));
                 }
-                // Kick test 2L 4
+                // Kick test R2 4 MIRRORED
                 if (!topDown2 && !bottomDown2Right1)
                 {
                     pieceMovementScript.setTranslationVectorCC(new Vector2(0, -2));
                 }
-                // Kick test 2L 2
-                if (!tPieceLeftBools[0] && !tPieceLeftBools[1])
+                // Kick test R2 2 MIRRORED
+                if (!tPieceRightBools[0] && !tPieceRightBools[1])
                 {
                     pieceMovementScript.setTranslationVectorCC(new Vector2(-1, 0));
                 }
-                // Kick test 2L 1
+                // Kick test R2 1 MIRRORED & 2L 1
                 if (!tPieceBottomBools[0])
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
                     pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
+                    if (tPieceLeftBools[0] || tPieceRightBools[0])
+                    {
+                        PieceMovement.isSpinning = true;
+                    }
                 }
                 //// Movement tests
                 if (tPieceRightBools[2] || tPieceTopBools[2])
@@ -514,12 +530,17 @@ public class TPieceCollision : MonoBehaviour
                 if (!leftLeft2 && !topDown2)
                 {
                     pieceMovementScript.setTranslationVectorCC(new Vector2(-1, -1));
+                    PieceMovement.isSpinning = true;
                 }
                 // Kick test L0 1
                 if (!tPieceBottomBools[3])
                 {
                     pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));
                     pieceMovementScript.setTranslationVectorCC(new Vector2(0, 0));
+                    if (tPieceTopBools[0] || tPieceRightBools[3])
+                    {
+                        PieceMovement.isSpinning = true;
+                    }
                 }
                 //// Movement Tests
                 if (tPieceRightBools[2] || tPieceTopBools[2] || tPieceLeftBools[2])

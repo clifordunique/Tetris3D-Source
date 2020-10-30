@@ -696,7 +696,7 @@ public class ZPieceCollision : MonoBehaviour
                 // Kick test L0 2
                 if (!rightLeft2)
                 {
-                    pieceMovementScript.setTranslationVectorC(new Vector2(1, 0));
+                    pieceMovementScript.setTranslationVectorC(new Vector2(-1, 0));
                 }
                 // Kick test L0 1
                 if (!zPieceBottomBools[3] && !zPieceTopBools[0])
@@ -751,6 +751,8 @@ public class ZPieceCollision : MonoBehaviour
 
     private void resetMovementBools()
     {
+        PieceMovement.isSpinning = false;
+        PieceMovement.isKicking = false;
         pieceMovementScript.setCanMoveLeft(true);
         pieceMovementScript.setCanMoveRight(true);
         pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));

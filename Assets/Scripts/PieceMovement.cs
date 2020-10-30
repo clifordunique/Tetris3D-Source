@@ -21,6 +21,8 @@ public class PieceMovement : MonoBehaviour
 
     // I don't usually like to use static variables for things, but there's a time and place for everything.
     public static float distanceDown = 90f;
+    public static bool isSpinning = false;
+    public static bool isKicking = false;
 
     #endregion
 
@@ -196,14 +198,28 @@ public class PieceMovement : MonoBehaviour
         {
             if (canRotateClockwise)
             {
+                if (isSpinning)
+                    Score.hasSpun = true;
+                else
+                    Score.hasSpun = false;
+                if (isKicking)
+                    Score.hasKicked = true;
+                else
+                    Score.hasKicked = false;
                 rotateClockwise(translationVectorC);
             }
-        } 
-
-        if (inputRCC)
+        } else if (inputRCC)
         {
             if (canRotateCounterClockwise)
             {
+                if (isSpinning)
+                    Score.hasSpun = true;
+                else
+                    Score.hasSpun = false;
+                if (isKicking)
+                    Score.hasKicked = true;
+                else
+                    Score.hasKicked = false;
                 rotateCounterClockwise(translationVectorCC);
             }
         }
@@ -337,11 +353,15 @@ public class PieceMovement : MonoBehaviour
     }
     public void setTranslationVectorC(Vector2 setValue)
     {
+        isSpinning = false;
+        isKicking = false;
         canRotateClockwise = true;
         translationVectorC = setValue;
     }
     public void setTranslationVectorCC(Vector2 setValue)
     {
+        isSpinning = false;
+        isKicking = false;
         canRotateCounterClockwise = true;
         translationVectorCC = setValue;
     }

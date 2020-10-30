@@ -691,6 +691,8 @@ public class SPieceCollision : MonoBehaviour
 
     private void resetMovementBools()
     {
+        PieceMovement.isSpinning = false;
+        PieceMovement.isKicking = false;
         pieceMovementScript.setCanMoveLeft(true);
         pieceMovementScript.setCanMoveRight(true);
         pieceMovementScript.setTranslationVectorC(new Vector2(0, 0));

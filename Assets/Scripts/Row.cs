@@ -52,10 +52,56 @@ public class Row : MonoBehaviour
             }
         }
         scan();
-        if (canClear)
+    }
+
+    #endregion
+
+    #region Public Methods
+
+    public bool getCanClear()
+    {
+        return canClear;
+    }
+
+    public void clear()
+    {
+        RaycastHit hit;
+        foreach (Transform transform in sensor)
         {
-            clear();
-            canClear = false;
+            if (Physics.Raycast(transform.position, Vector3.back, out hit))
+            {
+                try
+                {
+                    GameObject temp = hit.transform.parent.gameObject;
+                    hit.transform.parent.DetachChildren();
+                    Destroy(temp);
+                }
+                catch
+                {
+                    // Just didn't find a parent object, no problems.
+                }
+                try
+                {
+                    Destroy(hit.transform.gameObject);
+                }
+                catch
+                {
+                    Debug.Log("Couldn't destroy a gameobject in the row's clear() method");
+                }
+            }
+        }
+        canClear = false;
+    }
+
+    public void cascade()
+    {
+        foreach (Transform transform in sensor)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), Vector3.back, out hit))
+            {
+                hit.transform.Translate(Vector3.down, Space.World);
+            }
         }
     }
 
@@ -76,50 +122,7 @@ public class Row : MonoBehaviour
         if (total >= 10)
         {
             canClear = true;
-        } else if (total == 0)
-        {
-            cascade();
-        }
-    }
-
-    private void clear()
-    {
-        RaycastHit hit;
-        foreach (Transform transform in sensor)
-        {
-            if (Physics.Raycast(transform.position, Vector3.back, out hit))
-            {
-                try
-                {
-                    GameObject temp = hit.transform.parent.gameObject;
-                    hit.transform.parent.DetachChildren();
-                    Destroy(temp);
-                }
-                catch
-                {
-                    
-                }
-                try
-                {
-                    Destroy(hit.transform.gameObject);
-                }
-                catch
-                {
-                    Debug.Log("Couldn't destroy a gameobject in the row's clear() method");
-                }
-            }
-        }
-    }
-
-    public void cascade()
-    {
-        foreach (Transform transform in sensor)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), Vector3.back, out hit))
-            {
-                hit.transform.Translate(Vector3.down, Space.World);
-            }
+            Score.isClearing = true;
         }
     }
 
