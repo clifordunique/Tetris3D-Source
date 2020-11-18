@@ -15,5 +15,5 @@ Completed Tasks
 - [x] Piece pooling with proper management
 - [x] Piece randomization on a 7-bag system
 - [ ] ~~Advanced gravity system~~ Put off until further notice.
-- [ ] Points and line clears
+- [x] Points and line clears
 - [ ] Cleaning code (removing unused fields and simplifying logic)
