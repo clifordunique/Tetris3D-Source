@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.WSA;
 
 /*
  * PieceMovement handles all of the movements
@@ -33,7 +32,7 @@ public class PieceMovement : MonoBehaviour
     [SerializeField] private float landingTime = 1f;
     [SerializeField] private float movementTime = 0.1f;
     [SerializeField] private float leftRightSlightDelay = 0.05f;
-    [SerializeField] private float softDropTime = 0.1f;
+    [SerializeField] private float softDropSpeed = 5f;
 
     // Gets and Sets
     private bool canMoveLeft = true;
@@ -51,7 +50,6 @@ public class PieceMovement : MonoBehaviour
 
     // Fields for gravity movement
     private float gravityTimer = 0f;
-    private float softDropTimer = 0f;
 
     // Fields for landing
     private float landingTimer = 0f;
@@ -115,49 +113,43 @@ public class PieceMovement : MonoBehaviour
         {
             inputLeft = true;
             inputRight = false;
-            inputRC = false;
-            inputRCC = false;
-        } else if (Input.GetKey("right"))
+        }
+        else if (Input.GetKey("right"))
         {
             inputLeft = false;
             inputRight = true;
-            inputRC = false;
-            inputRCC = false;
+        }
+        else
+        {
+            inputLeft = false;
+            inputRight = false;
+
         }
         if (Input.GetKeyDown("up") || Input.GetKeyDown("x"))
         {
-            inputLeft = false;
-            inputRight = false;
             inputRC = true;
             inputRCC = false;
-        } else if (Input.GetKeyDown("z"))
+        }
+        else if (Input.GetKeyDown("z"))
         {
-            inputLeft = false;
-            inputRight = false;
             inputRC = false;
             inputRCC = true;
         }
-    }
+        else
+        {
+            inputRC = false;
+            inputRCC = false;
+        }
 
-    private void LateUpdate()
-    {
         // Gravity Handler
-        if (!isGrounded)
+        if (isSoftDropping && !isGrounded)
+            gravityTimer += softDropSpeed * Time.deltaTime;
+        else if (!isGrounded)
             gravityTimer += Time.deltaTime;
         if (gravityTimer >= gravityTime && !isGrounded)
         {
             currentPiece.transform.Translate(new Vector3(0, -1, 0), Space.World);
             gravityTimer = 0;
-        }
-
-        if (isSoftDropping)
-        {
-            softDropTimer += Time.deltaTime;
-            if (softDropTimer >= softDropTime && !isGrounded)
-            {
-                currentPiece.transform.Translate(new Vector3(0, -1, 0), Space.World);
-                softDropTimer = 0;
-            }
         }
 
         // Piece Landing Handler

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: fb54cca5972d1264a9233b042a76d482
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: a Apple Tea
+  fontNames:
+  - a Apple Tea
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 87cbf161c255b1748aaab99dded1a15d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -14,6 +14,12 @@ using UnityEngine;
 
 public class PieceManager : MonoBehaviour
 {
+    #region Public Static Fields
+
+    public static int currentPiece;
+
+    #endregion
+
     #region Private Serialized Field or Get/Set
 
     [SerializeField] private PieceVisual holdPreview;
@@ -61,7 +67,6 @@ public class PieceManager : MonoBehaviour
 
     private int[] firstBag;
     private int[] secondBag;
-    private int currentPiece;
     private int heldPiece;
     private bool canHold;
     private bool onSecondBag;
